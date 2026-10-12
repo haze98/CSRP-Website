@@ -1,0 +1,1515 @@
+
+> csrp-website@1.0.0 dev
+> next dev
+
+▲ Next.js 16.4.0 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.50.102:3000
+✓ Ready in 795ms
+✓ Running next.config.ts took 56ms
+- Experiments (use with caution):
+  ✓ authInterrupts
+  · optimizePackageImports
+
+ GET / 200 in 1398ms (next.js: 376ms, application-code: 1021ms)
+ GET / 200 in 337ms (next.js: 5ms, application-code: 332ms)
+ GET /manifest.webmanifest 200 in 201ms (next.js: 171ms, application-code: 30ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head headRenderTree={{...}}>
+                    <__next_viewport_boundary__>
+                    <MetadataWrapper>
+                      <__next_metadata_boundary__>
+                        <div
+                          hidden={true}
+-                         bis_skin_checked="1"
+                        >
+                    ...
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="saira_841d..." suppressHydrationWarning={true}>
+                          <head>
+                            <script>
+                            <script
+                              dangerouslySetInnerHTML={{
++                               __html: "(function(){try{\nvar d=document.documentElement;\nif(!('IntersectionObserver..."
+-                               __html: ""
+                              }}
+-                             bis_use="true"
+-                             type="text/javascript"
+-                             charset="utf-8"
+-                             nonce=""
+-                             data-dynamic-id="8bdd23bf-d34e-481a-84bd-e1b3c75eaa6a"
+-                             src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/200.js"
+                            >
+                            <script
++                             type="application/ld+json"
+-                             type="text/javascript"
+                              dangerouslySetInnerHTML={{
++                               __html: "{\"@context\":\"https://schema.org\",\"@type\":\"Organization\",\"name\":\"Ch..."
+-                               __html: ""
+                              }}
+-                             bis_use="true"
+-                             charset="utf-8"
+-                             nonce=""
+-                             data-dynamic-id="8bdd23bf-d34e-481a-84bd-e1b3c75eaa6a"
+-                             src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/executors/101.js"
+                            >
+                          <body
+                            className="min-h-dvh"
+-                           __processed_d4637110-5061-463f-9cb9-b1aeaf32771e__="true"
+-                           bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWll..."
+                          >
+                            <LoadingScreen>
+                              <div
+                                className="csrp-intro"
+                                aria-hidden="true"
+-                               bis_skin_checked="1"
+                              >
+                                <div
+                                  className="csrp-intro-moon"
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="csrp-intro-sun"
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="csrp-intro-crest relative"
+-                                 bis_skin_checked="1"
+                                >
+                            <Background>
+                              <div
+                                aria-hidden="true"
+                                className="pointer-events-none fixed inset-0 -z-50 overflow-hidden bg-[linear-gradient..."
+-                               bis_skin_checked="1"
+                              >
+                                <div
+                                  className="tone-moon drift absolute -left-[18%] -top-[22%] h-[75vh] w-[70vw] rounded..."
+                                  style={{--t:"38s"}}
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="tone-moon absolute -left-[22%] top-[38%] h-[60vh] w-[50vw] rounded-full b..."
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="tone-sun drift absolute -right-[16%] -top-[18%] h-[65vh] w-[55vw] rounded..."
+                                  style={{--t:"44s",animationDirection:"reverse"}}
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="tone-sun absolute -bottom-[26%] -right-[14%] h-[70vh] w-[65vw] rounded-fu..."
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_50%_35..."
+                                  style={{backgroundImage:"linear-gra...",backgroundSize:"72px 72px",animation:"grid-pan 2..."}}
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="absolute -left-[10%] top-[14%] h-[34vh] w-[60vw] -rotate-[18deg] opacity-..."
+                                  style={{backgroundImage:"url(\"data...",backgroundSize:"96px 96px"}}
+-                                 bis_skin_checked="1"
+                                >
+                                <div
+                                  className="absolute -right-[12%] bottom-[8%] h-[30vh] w-[55vw] -rotate-[18deg] opaci..."
+                                  style={{backgroundImage:"url(\"data...",backgroundSize:"96px 96px"}}
+-                                 bis_skin_checked="1"
+                                >
+                                <svg>
+                                <div
+                                  className="absolute inset-0 opacity-[0.05] mix-blend-overlay"
+                                  style={{backgroundImage:"url(\"data..."}}
+-                                 bis_skin_checked="1"
+                                >
+                                ...
+                            ...
+                              <Navbar>
+                                <motion.header className="fixed inse..." animate={{y:0}} ...>
+                                  <header className="fixed inse..." onFocusCapture={function onFocusCapture} style={{}} ...>
+                                    <a
+                                      href="#main"
+                                      className="sr-only rounded-md bg-snow px-4 py-2 text-sm font-semibold text-void ..."
+-                                     bis_skin_checked="1"
+                                    >
++                                     Skip to content
+                                    <div className="border-b t...">
+                                      <nav aria-label="Main" className="mx-auto fl...">
+                                        <LinkComponent>
+                                        <ul className="hidden ite...">
+                                          <li>
+                                          <li>
+                                            <LinkComponent href="/applications" aria-current={undefined} ...>
+                                              <a
+                                                aria-current={undefined}
+                                                data-magnetic="soft"
+                                                className="nav-link group relative block px-3 py-3 font-display text-[..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/applications"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <li>
+                                            <LinkComponent href="/rules" aria-current={undefined} data-magnetic="soft" ...>
+                                              <a
+                                                aria-current={undefined}
+                                                data-magnetic="soft"
+                                                className="nav-link group relative block px-3 py-3 font-display text-[..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/rules"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <li>
+                                            <LinkComponent href="/store" aria-current={undefined} data-magnetic="soft" ...>
+                                              <a
+                                                aria-current={undefined}
+                                                data-magnetic="soft"
+                                                className="nav-link group relative block px-3 py-3 font-display text-[..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/store"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <li>
+                                            <LinkComponent href="/status" aria-current={undefined} data-magnetic="soft" ...>
+                                              <a
+                                                aria-current={undefined}
+                                                data-magnetic="soft"
+                                                className="nav-link group relative block px-3 py-3 font-display text-[..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/status"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <li>
+                                            <LinkComponent href="/discord" aria-current={undefined} data-magnetic="soft" ...>
+                                              <a
+                                                aria-current={undefined}
+                                                data-magnetic="soft"
+                                                className="nav-link group relative block px-3 py-3 font-display text-[..."
+                                                ref={function}
+                                                onClick={function onClick}
+                                                onMouseEnter={function onMouseEnter}
+                                                onTouchStart={function onTouchStart}
+                                                href="/discord"
+-                                               bis_skin_checked="1"
+                                              >
+                                        <div className="flex items...">
+                                          <NotificationBell>
+                                          <UserMenu>
+                                            <a
+                                              href="/login"
+                                              onClick={function onClick}
+                                              aria-busy={true}
+                                              className="group relative inline-flex items-center justify-center gap-2 ..."
+                                              data-magnetic=""
+-                                             bis_skin_checked="1"
+                                            >
+                                          ...
+                                    ...
+                              ...
+                                <SegmentViewNode type="page" pagePath="page.tsx">
+                                  <SegmentTrieNode>
+                                  <Home>
+                                    <Hero initial={{mode:{...}, ...}}>
+                                      <section ref={{current:null}} data-tone="neutral" aria-labelledby="hero-title" ...>
+                                        <div>
+                                        <LoadableComponent>
+                                        ...
+                                          <div className="relative z..." style={{...}} ...>
+                                            <p>
+                                            <h1>
+                                            <p>
+                                            <p>
+                                            <div className="intro-up m..." style={{--d:"0.22s"}}>
+                                              <ButtonLink href="/applicati..." variant="crimson" size="lg" ...>
+                                                <LinkComponent href="/applicati..." className="group rela..." ...>
+                                                  <a
+                                                    className="group relative inline-flex items-center justify-center ..."
+                                                    data-magnetic=""
+                                                    ref={function}
+                                                    onClick={function onClick}
+                                                    onMouseEnter={function onMouseEnter}
+                                                    onTouchStart={function onTouchStart}
+                                                    href="/applications?apply=whitelist"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <ButtonLink href="/applicati..." variant="light" size="lg">
+                                                <LinkComponent href="/applicati..." className={"group re..."} ...>
+                                                  <a
+                                                    className={"group relative inline-flex items-center justify-cente..."}
+                                                    data-magnetic=""
+                                                    ref={function}
+                                                    onClick={function onClick}
+                                                    onMouseEnter={function onMouseEnter}
+                                                    onTouchStart={function onTouchStart}
+                                                    href="/applications?apply=whitelist"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                              <ButtonLink href="https://di..." variant="discord" size="lg">
+                                                <a
+                                                  href="https://discord.gg/your-invite"
+                                                  className={"group relative inline-flex items-center justify-center ..."}
+                                                  data-magnetic=""
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+-                                                 bis_skin_checked="1"
+                                                >
+                                            <div className="intro-up mt-8" style={{--d:"0.28s"}}>
+                                              <HeroStatusPill initial={{mode:{...}, ...}}>
+                                                <LinkComponent href="/status" className="glass grou...">
+                                                  <a
+                                                    className="glass group inline-flex items-center gap-3 rounded-xl p..."
+                                                    ref={function}
+                                                    onClick={function onClick}
+                                                    onMouseEnter={function onMouseEnter}
+                                                    onTouchStart={function onTouchStart}
+                                                    href="/status"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                        <a
+                                          href="#live-strip"
+                                          className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items..."
+-                                         bis_skin_checked="1"
+                                        >
+                                    <QuickBar>
+                                    ...
+                                      <div className="stagger mt...">
+                                        <ShowcaseCard>
+                                        <ShowcaseCard>
+                                        <ShowcaseCard item={{n:"03",title:"...", ...}} className="lg:col-spa...">
+                                          <article suppressHydrationWarning={true} ref={{current:null}} data-glow="" ...>
+                                            <motion.div>
+                                            <motion.div aria-hidden="true" style={{opacity:{...}}} ...>
+                                              <div
+                                                aria-hidden="true"
+                                                className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#0506..."
+                                                style={{opacity:0.85}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                            <div
+                                              aria-hidden="true"
+                                              className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,6,8,0.6),tr..."
+-                                             bis_skin_checked="1"
+                                            >
+                                            <motion.div style={{y:{...}}} className="relative f...">
+                                              <div
+                                                className="relative flex h-full flex-col justify-between p-6 sm:p-8"
+                                                style={{transform:"translateY..."}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-start justify-between gap-3"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <div
+                                                  className="max-w-md"
+-                                                 bis_skin_checked="1"
+                                                >
+                                        <ShowcaseCard item={{n:"04",title:"...", ...}} className="lg:col-spa...">
+                                          <article suppressHydrationWarning={true} ref={{current:null}} data-glow="" ...>
+                                            <motion.div style={{y:{...}, ...}} className="absolute i...">
+                                              <div
+                                                className="absolute inset-[-30px]"
+                                                style={{transform:"translateY..."}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="h-full w-full scale-[1.04] transition-transform duration-..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                            <motion.div aria-hidden="true" style={{opacity:{...}}} ...>
+                                              <div
+                                                aria-hidden="true"
+                                                className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#0506..."
+                                                style={{opacity:0.85}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                            <div
+                                              aria-hidden="true"
+                                              className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,6,8,0.6),tr..."
+-                                             bis_skin_checked="1"
+                                            >
+                                            <motion.div style={{y:{...}}} className="relative f...">
+                                              <div
+                                                className="relative flex h-full flex-col justify-between p-6 sm:p-8"
+                                                style={{transform:"translateY..."}}
+                                                ref={function useMotionRef.useCallback}
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-start justify-between gap-3"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                <div
+                                                  className="max-w-md"
+-                                                 bis_skin_checked="1"
+                                                >
+                                    <WhatIsCsrp>
+                                      <section data-tone="moon" aria-labelledby="what-title" className="relative p...">
+                                        <div
+                                          className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 sm:px-8 lg:grid-co..."
+-                                         bis_skin_checked="1"
+                                        >
+                                          <Reveal>
+                                            <div suppressHydrationWarning={true} className="reveal lg:...">
+                                              <div
+                                                className="flex items-center gap-3"
+-                                               bis_skin_checked="1"
+                                              >
+                                              <h2>
+                                              <p>
+                                              <p>
+                                              <CelestialDivider>
+                                                <div
+                                                  aria-hidden="true"
+                                                  className="relative flex items-center gap-4 mt-10 max-w-md"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              ...
+                                          <Stagger>
+                                            <div
+                                              className="stagger grid gap-px self-start overflow-hidden rounded-2xl bo..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className="reveal bg-...">
+                                                  <div
+                                                    className="flex items-center justify-between"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                    <StatusPreview initial={{mode:{...}, ...}} history={{...}}>
+                                      <section data-tone="neutral" aria-labelledby="network-title" ...>
+                                        <div
+                                          className="mx-auto w-full max-w-[1440px] px-5 sm:px-8"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <Reveal className="card relat...">
+                                            <div suppressHydrationWarning={true} className="reveal car..." ...>
+                                              <div
+                                                aria-hidden="true"
+                                                className="absolute -left-40 -top-40 h-80 w-80 rounded-full bg-royal-5..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+                                                aria-hidden="true"
+                                                className="absolute -bottom-40 -right-40 h-80 w-80 rounded-full bg-cri..."
+-                                               bis_skin_checked="1"
+                                              >
+                                              <div
+                                                className="relative flex flex-col gap-6 border-b border-white/[0.06] p..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center gap-3"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                                <div
+                                                  className="flex flex-wrap items-center gap-3"
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <div
+                                                className="relative mt-7"
+-                                               bis_skin_checked="1"
+                                              >
+                                                <LiveTiles data={{mode:{...}, ...}} history={{...}} loading={false} ...>
+                                                  <div
+                                                    className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <Tile className="lg:col-span-3" icon={<Users>} label="Concurrent..." ...>
+                                                      <div
+                                                        data-glow=""
+                                                        className="card flex flex-col p-5 lg:col-span-3"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-center justify-between gap-2"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-4 font-display text-[2.4rem] font-bold leading..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <SparkPlaceholder>
+                                                        <div
+                                                          className="mt-auto pt-4 text-xs text-silver-500"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <div
+                                                              className="h-1.5 overflow-hidden rounded-full bg-white/[..."
+                                                              role="progressbar"
+                                                              aria-label="Server capacity"
+                                                              aria-valuemin={0}
+                                                              aria-valuemax={128}
+                                                              aria-valuenow={0}
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                              <div
+                                                                className="h-full rounded-full bg-gradient-to-r from-r..."
+                                                                style={{width:"1.5%"}}
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                            ...
+                                                    <Tile className="lg:col-span-3" icon={<BrandIcon>} ...>
+                                                      <div
+                                                        data-glow=""
+                                                        className="card flex flex-col p-5 lg:col-span-3"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-center justify-between gap-2"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-4 font-display text-[2.4rem] font-bold leading..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-auto pt-4 text-xs text-silver-500"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <div
+                                                              className="h-1.5 overflow-hidden rounded-full bg-white/[..."
+                                                              aria-hidden="true"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                              <div
+                                                                className="h-full rounded-full bg-online/80 transition..."
+                                                                style={{width:"0%"}}
+-                                                               bis_skin_checked="1"
+                                                              >
+                                                            ...
+                                                    <Tile className="lg:col-span-2" icon={<ShieldCheck>} ...>
+                                                      <div
+                                                        data-glow=""
+                                                        className="card flex flex-col p-5 lg:col-span-2"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-center justify-between gap-2"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-4 font-display text-[2.4rem] font-bold leading..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-auto pt-4 text-xs text-silver-500"
+-                                                         bis_skin_checked="1"
+                                                        >
++                                                         Members holding the whitelist role
+                                                    <Tile className="lg:col-span-2" icon={<Server>} label="Server uptime" ...>
+                                                      <div
+                                                        data-glow=""
+                                                        className="card flex flex-col p-5 lg:col-span-2"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-center justify-between gap-2"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-4 font-display text-[2.4rem] font-bold leading..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-auto pt-4 text-xs text-silver-500"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                            <div
+                                                              className="flex gap-[3px]"
+                                                              aria-label="Uptime per day, last 30 days"
+                                                              role="img"
+-                                                             bis_skin_checked="1"
+                                                            >
+                                                            ...
+                                                    <Tile className="sm:col-spa..." icon={<Clock3>} label="Weekly pla..." ...>
+                                                      <div
+                                                        data-glow=""
+                                                        className="card flex flex-col p-5 sm:col-span-2 lg:col-span-2"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-center justify-between gap-2"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <div
+                                                          className="mt-4 font-display text-[2.4rem] font-bold leading..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <SparkPlaceholder>
+                                                        <div
+                                                          className="mt-auto pt-4 text-xs text-silver-500"
+-                                                         bis_skin_checked="1"
+                                                        >
++                                                         Tracked by the game server once connected
+                                              <div
+                                                className="relative mt-7 flex flex-col items-start justify-between gap..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <p>
+                                                <ButtonLink href="/status" variant="outline">
+                                                  <LinkComponent href="/status" className={"group re..."} ...>
+                                                    <a
+                                                      className={"group relative inline-flex items-center justify-cen..."}
+                                                      data-magnetic=""
+                                                      ref={function}
+                                                      onClick={function onClick}
+                                                      onMouseEnter={function onMouseEnter}
+                                                      onTouchStart={function onTouchStart}
+                                                      href="/status"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                    <SectionTransition>
+                                      <div
+                                        aria-hidden="true"
+                                        className={"mx-auto w-full max-w-[1440px] px-5 sm:px-8 "}
+-                                       bis_skin_checked="1"
+                                      >
+                                    <Departments>
+                                      <section data-tone="sun" aria-labelledby="dept-title" className="py-20 sm:p...">
+                                        <div
+                                          className="container-x"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <SectionHeader>
+                                            <div
+                                              className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="max-w-3xl"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <Stagger>
+                                            <div
+                                              className="stagger mt-12 grid gap-4 md:grid-cols-2"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <article data-glow="" className="card group...">
+                                                    <span>
+                                                    <div
+                                                      className="relative flex items-start justify-between gap-4"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    <p>
+                                                    <h3>
+                                                    <p>
+                                                    <ul>
+                                                    <div
+                                                      className="relative mt-auto pt-7"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <LinkComponent>
+                                                        <LinkComponent href="/applicati..." className="inline-fle...">
+                                                          <a
+                                                            className="inline-flex items-center gap-2 font-display tex..."
+                                                            ref={function}
+                                                            onClick={function onClick}
+                                                            onMouseEnter={function onMouseEnter}
+                                                            onTouchStart={function onTouchStart}
+                                                            href="/applications?apply=lspd"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <article data-glow="" className="card group...">
+                                                    <span>
+                                                    <div
+                                                      className="relative flex items-start justify-between gap-4"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    <p>
+                                                    <h3>
+                                                    <p>
+                                                    <ul>
+                                                    <div
+                                                      className="relative mt-auto pt-7"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <LinkComponent>
+                                                        <LinkComponent href="/applicati..." className="inline-fle...">
+                                                          <a
+                                                            className="inline-flex items-center gap-2 font-display tex..."
+                                                            ref={function}
+                                                            onClick={function onClick}
+                                                            onMouseEnter={function onMouseEnter}
+                                                            onTouchStart={function onTouchStart}
+                                                            href="/applications?apply=ems"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <article data-glow="" className="card group...">
+                                                    <span>
+                                                    <div
+                                                      className="relative flex items-start justify-between gap-4"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    <p>
+                                                    <h3>
+                                                    <p>
+                                                    <ul>
+                                                    <div
+                                                      className="relative mt-auto pt-7"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <LinkComponent>
+                                                        <LinkComponent href="/applicati..." className="inline-fle...">
+                                                          <a
+                                                            className="inline-flex items-center gap-2 font-display tex..."
+                                                            ref={function}
+                                                            onClick={function onClick}
+                                                            onMouseEnter={function onMouseEnter}
+                                                            onTouchStart={function onTouchStart}
+                                                            href="/applications?apply=staff"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <article data-glow="" className="card group...">
+                                                    <span>
+                                                    <div
+                                                      className="relative flex items-start justify-between gap-4"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    <p>
+                                                    <h3>
+                                                    <p>
+                                                    <ul>
+                                                    <div
+                                                      className="relative mt-auto pt-7"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                      <a
+                                                        href="https://discord.gg/your-invite"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="font-display text-sm font-semibold uppercase tracki..."
+-                                                       bis_skin_checked="1"
+                                                      >
++                                                       Get notified on Discord →
+                                    <Platform>
+                                      <section data-tone="neutral" aria-labelledby="platform-t..." ...>
+                                        <div
+                                          className="mx-auto w-full max-w-[1440px] px-5 sm:px-8"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <SectionHeader>
+                                            <div
+                                              className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <div
+                                                className="max-w-3xl"
+-                                               bis_skin_checked="1"
+                                              >
+                                          <Stagger>
+                                            <div
+                                              className="stagger mt-12 grid grid-cols-1 gap-px overflow-hidden rounded..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/applicati..." className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/applications?apply=whitelist"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/applications" className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/applications"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/support" className="group rela..." data-glow="">
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/support"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/support?t..." className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/support?type=PLAYER_REPORT"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/support?t..." className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/support?type=BAN_APPEAL"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/support?t..." className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/support?type=BUG_REPORT"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <a
+                                                    href="https://discord.gg/your-invite"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="group relative block h-full bg-charcoal p-6 transition-..."
+                                                    data-glow=""
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                    <div
+                                                      className="flex items-start justify-between"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                                    ...
+                                              <RevealItem>
+                                                <div suppressHydrationWarning={true} className={"reveal "}>
+                                                  <LinkComponent>
+                                                    <LinkComponent href="/applicati..." className="group rela..." ...>
+                                                      <a
+                                                        className="group relative block h-full bg-charcoal p-6 transit..."
+                                                        data-glow=""
+                                                        ref={function}
+                                                        onClick={function onClick}
+                                                        onMouseEnter={function onMouseEnter}
+                                                        onTouchStart={function onTouchStart}
+                                                        href="/applications?apply=creator"
+-                                                       bis_skin_checked="1"
+                                                      >
+                                                        <div
+                                                          className="flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        ...
+                                    <SectionTransition>
+                                      <div
+                                        aria-hidden="true"
+                                        className={"mx-auto w-full max-w-[1440px] px-5 sm:px-8 "}
+-                                       bis_skin_checked="1"
+                                      >
+                                    <Faq>
+                                      <section data-tone="moon" aria-labelledby="faq-title" className="py-20 sm:p...">
+                                        <div
+                                          className="container-x grid gap-12 lg:grid-cols-[0.9fr_1.4fr] lg:gap-20"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="lg:sticky lg:top-28 lg:self-start"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <SectionHeader>
+                                              <div
+                                                className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-bet..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="max-w-3xl"
+-                                                 bis_skin_checked="1"
+                                                >
+                                          ...
+                                            <PopChildMeasure isPresent={true} childRef={{current:null}} sizeRef={{...}} ...>
+                                              <motion.div id="_R_aklmpel..." role="region" ...>
+                                                <div
+                                                  id="_R_aklmpelb_-0-p"
+                                                  role="region"
+                                                  aria-labelledby="_R_aklmpelb_-0-b"
+                                                  className="overflow-hidden"
+                                                  style={{height:"auto",opacity:1}}
+                                                  ref={function useMotionRef.useCallback}
+-                                                 bis_skin_checked="1"
+                                                >
+                                    <Developers developers={[...]} mode="unavailable">
+                                      <section data-tone="neutral" aria-labelledby="devs-title" className="overflow-h...">
+                                        <div
+                                          className="mx-auto w-full max-w-[1320px] px-5 sm:px-8"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <Reveal className="grid items...">
+                                            <div suppressHydrationWarning={true} className="reveal gri..." ...>
+                                              <div
+-                                               bis_skin_checked="1"
+                                              >
+                                                <div
+                                                  className="flex items-center gap-3"
+-                                                 bis_skin_checked="1"
+                                                >
+                                                ...
+                                              ...
+                                          <div
+                                            className="mt-12"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Stagger className="grid gap-5...">
+                                              <div
+                                                className="stagger grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-co..."
+-                                               bis_skin_checked="1"
+                                              >
+                                                <RevealItem className="">
+                                                  <div suppressHydrationWarning={true} className={"reveal "}>
+                                                    <EmptySlot index={0}>
+                                                      <article className="dev-empty ...">
+                                                        <span>
+                                                        <span>
+                                                        <div
+                                                          className="relative flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <p>
+                                                        <p>
+                                                        <div
+                                                          aria-hidden="true"
+                                                          className="relative mt-5 space-y-2 rounded-xl border border-..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="skeleton h-2.5 w-2/3 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="skeleton h-2.5 w-1/2 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                        <dl className="relative m...">
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                <RevealItem className="">
+                                                  <div suppressHydrationWarning={true} className={"reveal "}>
+                                                    <EmptySlot index={1}>
+                                                      <article className="dev-empty ...">
+                                                        <span>
+                                                        <span>
+                                                        <div
+                                                          className="relative flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <p>
+                                                        <p>
+                                                        <div
+                                                          aria-hidden="true"
+                                                          className="relative mt-5 space-y-2 rounded-xl border border-..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="skeleton h-2.5 w-2/3 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="skeleton h-2.5 w-1/2 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                        <dl className="relative m...">
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                <RevealItem className="hidden sm:...">
+                                                  <div suppressHydrationWarning={true} className="reveal hid...">
+                                                    <EmptySlot index={2}>
+                                                      <article className="dev-empty ...">
+                                                        <span>
+                                                        <span>
+                                                        <div
+                                                          className="relative flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <p>
+                                                        <p>
+                                                        <div
+                                                          aria-hidden="true"
+                                                          className="relative mt-5 space-y-2 rounded-xl border border-..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="skeleton h-2.5 w-2/3 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="skeleton h-2.5 w-1/2 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                        <dl className="relative m...">
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                <RevealItem className="hidden sm:...">
+                                                  <div suppressHydrationWarning={true} className="reveal hid...">
+                                                    <EmptySlot index={3}>
+                                                      <article className="dev-empty ...">
+                                                        <span>
+                                                        <span>
+                                                        <div
+                                                          className="relative flex items-start justify-between"
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                        <p>
+                                                        <p>
+                                                        <div
+                                                          aria-hidden="true"
+                                                          className="relative mt-5 space-y-2 rounded-xl border border-..."
+-                                                         bis_skin_checked="1"
+                                                        >
+                                                          <div
+                                                            className="skeleton h-2.5 w-2/3 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="skeleton h-2.5 w-1/2 rounded-full"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                        <dl className="relative m...">
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                                          <div
+                                                            className="flex items-center justify-between gap-3"
+-                                                           bis_skin_checked="1"
+                                                          >
+                                    <FinalCta>
+                                      <section data-tone="sun" aria-labelledby="cta-title" className="relative i...">
+                                        <div
+                                          aria-hidden="true"
+                                          className="absolute inset-0 -z-10"
+-                                         bis_skin_checked="1"
+                                        >
+                                          <div
+                                            className="absolute inset-0 bg-[linear-gradient(180deg,#050608_0%,#080a0f_..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="cta-fog absolute inset-x-[-10%] bottom-[-10%] h-[55%] bg-[radia..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="cta-moon-glow absolute left-[-18%] top-[-10%] h-[120%] w-[60%] ..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="absolute left-[-24%] top-1/2 w-[clamp(240px,32vw,520px)] -trans..."
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Parallax speed={0.1} className="relative a...">
+                                              <motion.div ref={{current:null}} style={{y:{...}}} ...>
+                                                <div
+                                                  className="relative aspect-square"
+                                                  style={{transform:"translateY..."}}
+                                                  ref={function useMotionRef.useCallback}
+-                                                 bis_skin_checked="1"
+                                                >
+                                          <div
+                                            className="cta-sun-glow absolute right-[-18%] top-[-10%] h-[120%] w-[60%] ..."
+-                                           bis_skin_checked="1"
+                                          >
+                                          <div
+                                            className="absolute right-[-26%] top-1/2 w-[clamp(260px,34vw,560px)] -tran..."
+-                                           bis_skin_checked="1"
+                                          >
+                                            <Parallax speed={-0.1} className="relative a...">
+                                              <motion.div ref={{current:null}} style={{y:{...}}} ...>
+                                                <div
+                                                  className="relative aspect-square"
+                                                  style={{transform:"translateY..."}}
+                                                  ref={function useMotionRef.useCallback}
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="sun-haze absolute inset-[-18%] rounded-full bg-[radial-..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                          <svg>
+                                          <div
+                                            className="absolute inset-0 opacity-[0.035] [mask-image:radial-gradient(el..."
+                                            style={{backgroundImage:"url(\"data...",backgroundSize:"88px 88px"}}
+-                                           bis_skin_checked="1"
+                                          >
+                                          ...
+                                        <Particles>
+                                        <Reveal>
+                                          <div suppressHydrationWarning={true} className="reveal rel...">
+                                            <p>
+                                            <h2>
+                                            <p>
+                                            <div className="mt-10 flex...">
+                                              <ButtonLink>
+                                                <LinkComponent>
+                                                  <LinkComponent href="/applicati..." className="group rela..." ...>
+                                                    <a
+                                                      className="group relative inline-flex items-center justify-cente..."
+                                                      data-magnetic=""
+                                                      ref={function}
+                                                      onClick={function onClick}
+                                                      onMouseEnter={function onMouseEnter}
+                                                      onTouchStart={function onTouchStart}
+                                                      href="/applications?apply=whitelist"
+-                                                     bis_skin_checked="1"
+                                                    >
+                                              <ButtonLink>
+                                                <a
+                                                  href="https://discord.gg/your-invite"
+                                                  className="group relative inline-flex items-center justify-center ga..."
+                                                  data-magnetic=""
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
+-                                                 bis_skin_checked="1"
+                                                >
+                                    ...
+                                ...
+                              <Footer>
+                                <footer className="relative m...">
+                                  <div>
+                                  <div className="container-...">
+                                    <div className="max-w-sm">
+                                      <div>
+                                      <p>
+                                      <div className="mt-6 flex ...">
+                                        <ButtonLink>
+                                          <a
+                                            href="https://discord.gg/your-invite"
+                                            className={"group relative inline-flex items-center justify-center gap-2 ..."}
+                                            data-magnetic=""
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+-                                           bis_skin_checked="1"
+                                          >
+                                        ...
+                                    <div className="grid grid-...">
+                                      <nav aria-label="Community">
+                                        <p>
+                                        <ul className="mt-4 space...">
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/discord" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/discord"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Discord
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/rules" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/rules"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Rules
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/applications" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/applications"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Applications
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/status" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/status"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Server Status
+                                      <nav aria-label="Support">
+                                        <p>
+                                        <ul className="mt-4 space...">
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/support" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/support"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Support Center
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/support?t..." className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/support?type=BAN_APPEAL"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Ban Appeal
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/support?t..." className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/support?type=BUG_REPORT"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Bug Report
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/support?t..." className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/support?type=PLAYER_REPORT"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Player Report
+                                      <nav aria-label="Legal">
+                                        <p>
+                                        <ul className="mt-4 space...">
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/legal/pri..." className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/legal/privacy"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Privacy Policy
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/legal/terms" className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/legal/terms"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Terms
+                                          <li>
+                                            <LinkComponent>
+                                              <LinkComponent href="/legal/ref..." className="text-sm te...">
+                                                <a
+                                                  className="text-sm text-silver-400 transition-colors hover:text-snow"
+                                                  ref={function}
+                                                  onClick={function onClick}
+                                                  onMouseEnter={function onMouseEnter}
+                                                  onTouchStart={function onTouchStart}
+                                                  href="/legal/refunds"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Refund Policy
+                                  ...
+                              ...
+                  ...
+ 
+ GET /manifest.webmanifest 200 in 13ms (next.js: 2ms, application-code: 10ms)
+ GET /api/auth/session 200 in 1148ms (next.js: 1095ms, application-code: 53ms)
+ GET /api/auth/session 200 in 40ms (next.js: 13ms, application-code: 26ms)
+ GET /api/auth/session 200 in 215ms (next.js: 3ms, application-code: 212ms)
+ GET /api/me 200 in 215ms (next.js: 98ms, application-code: 117ms)
+ GET /api/notifications 200 in 112ms (next.js: 42ms, application-code: 70ms)
+ GET /api/auth/session 200 in 24ms (next.js: 3ms, application-code: 21ms)
+ GET /api/notifications 200 in 33ms (next.js: 3ms, application-code: 30ms)
+ GET /api/status 200 in 123ms (next.js: 110ms, application-code: 13ms)
+ GET /api/status 200 in 12ms (next.js: 3ms, application-code: 9ms)
+ GET /api/notifications 200 in 31ms (next.js: 2ms, application-code: 29ms)
+ GET /api/notifications 200 in 22ms (next.js: 2ms, application-code: 20ms)
+ GET /api/status 200 in 14ms (next.js: 3ms, application-code: 11ms)
+ GET /api/notifications 200 in 19ms (next.js: 3ms, application-code: 17ms)
+ GET /api/notifications 200 in 21ms (next.js: 2ms, application-code: 19ms)
+ GET /applications 200 in 60ms (next.js: 15ms, application-code: 45ms)
+ GET /manifest.webmanifest 200 in 10ms (next.js: 2ms, application-code: 8ms)
+ GET /api/applications 200 in 107ms (next.js: 60ms, application-code: 47ms)
+ GET /api/applications 200 in 39ms (next.js: 2ms, application-code: 37ms)
+ GET /rules 200 in 56ms (next.js: 13ms, application-code: 43ms)
+ GET /manifest.webmanifest 200 in 11ms (next.js: 2ms, application-code: 9ms)
+ GET /api/notifications 200 in 32ms (next.js: 3ms, application-code: 29ms)
+ GET /api/notifications 200 in 31ms (next.js: 3ms, application-code: 28ms)
+ GET /account 200 in 227ms (next.js: 106ms, application-code: 120ms)
+ GET /manifest.webmanifest 200 in 14ms (next.js: 3ms, application-code: 10ms)
+ GET /applications?apply=whitelist 200 in 44ms (next.js: 3ms, application-code: 41ms)
+ GET /api/applications 200 in 22ms (next.js: 1.9ms, application-code: 20ms)
+ GET /api/applications 200 in 31ms (next.js: 3ms, application-code: 28ms)
+ GET /manifest.webmanifest 200 in 10ms (next.js: 2ms, application-code: 8ms)
+ GET /api/whitelist 200 in 75ms (next.js: 44ms, application-code: 31ms)
+[audit:WHITELIST] WHITELIST_QUIZ_STARTED 8239fc3b-3a2b-402c-95b1-463617168bb5 dev.player
+ POST /api/whitelist/quiz 201 in 60ms (next.js: 38ms, application-code: 21ms)
+ GET /api/notifications 200 in 22ms (next.js: 3ms, application-code: 20ms)
+[audit:WHITELIST] WHITELIST_QUIZ_PASSED 8239fc3b-3a2b-402c-95b1-463617168bb5 dev.player
+ POST /api/whitelist/quiz/submit 200 in 65ms (next.js: 45ms, application-code: 20ms)
+ GET /api/notifications 200 in 26ms (next.js: 2ms, application-code: 24ms)
+ GET /api/notifications 200 in 30ms (next.js: 2ms, application-code: 27ms)
+[api] TypeError: Cannot read properties of undefined (reading 'id')
+    at applicant (src\lib\store\memory.ts:37:47)
+    at Object.createApplication (src\lib\store\memory.ts:75:18)
+    at Object.submitApplication (src\services\whitelist.service.ts:150:29)
+    at async (src\app\api\applications\route.ts:15:38)
+    at async (src\lib\api.ts:49:14)
+  35 | const clone = <T>(v: T): T => structuredClone(v);
+  36 |
+> 37 | const applicant = (u: UserRecord) => ({ id: u.id, discordId: u.discordId, username: u.username, displayName: u.displayName, avatarUrl: avatarUrl(u.discordId, u.avatar) });
+     |                                               ^
+  38 | const userName = (id: string | null) => db.users.find((u) => u.id === id)?.username ?? "staff";
+  39 |
+  40 | export const memoryStore: Store = {
+ POST /api/applications 500 in 239ms (next.js: 3ms, application-code: 236ms)
+ POST /api/applications 409 in 25ms (next.js: 1.9ms, application-code: 23ms)
+ POST /api/applications 409 in 19ms (next.js: 3ms, application-code: 17ms)
+ POST /api/applications 409 in 17ms (next.js: 2ms, application-code: 14ms)
+ POST /api/applications 409 in 31ms (next.js: 2ms, application-code: 29ms)
+ POST /api/applications 429 in 22ms (next.js: 4ms, application-code: 18ms)
+ POST /api/applications 429 in 28ms (next.js: 2ms, application-code: 26ms)
+ POST /api/applications 429 in 24ms (next.js: 3ms, application-code: 21ms)
+ POST /api/applications 429 in 19ms (next.js: 2ms, application-code: 16ms)
+ POST /api/applications 429 in 32ms (next.js: 2.0ms, application-code: 30ms)
+ POST /api/applications 429 in 21ms (next.js: 2ms, application-code: 18ms)
+ POST /api/applications 429 in 21ms (next.js: 2.0ms, application-code: 19ms)
+ POST /api/applications 429 in 24ms (next.js: 2ms, application-code: 22ms)
+ POST /api/applications 429 in 21ms (next.js: 1.7ms, application-code: 19ms)
+ POST /api/applications 429 in 21ms (next.js: 2ms, application-code: 19ms)
+ GET /manifest.webmanifest 200 in 18ms (next.js: 3ms, application-code: 15ms)
+ GET /api/notifications 200 in 45ms (next.js: 4ms, application-code: 41ms)
+ POST /api/applications 429 in 25ms (next.js: 3ms, application-code: 22ms)
+ POST /api/applications 429 in 23ms (next.js: 2ms, application-code: 21ms)
+ POST /api/applications 429 in 23ms (next.js: 1.8ms, application-code: 21ms)
+ POST /api/applications 429 in 22ms (next.js: 2ms, application-code: 20ms)
+ POST /api/applications 429 in 23ms (next.js: 2ms, application-code: 20ms)
+ POST /api/applications 429 in 24ms (next.js: 3ms, application-code: 21ms)
+ POST /api/applications 429 in 27ms (next.js: 3ms, application-code: 25ms)
+ POST /api/applications 429 in 15ms (next.js: 2.0ms, application-code: 13ms)
+ POST /api/applications 429 in 24ms (next.js: 3ms, application-code: 21ms)
+ POST /api/applications 429 in 27ms (next.js: 2ms, application-code: 25ms)
+ POST /api/applications 429 in 28ms (next.js: 2ms, application-code: 26ms)
+ POST /api/applications 429 in 22ms (next.js: 3ms, application-code: 18ms)
+ POST /api/applications 429 in 26ms (next.js: 1.8ms, application-code: 24ms)
+ POST /api/applications 429 in 18ms (next.js: 1.7ms, application-code: 16ms)
+ POST /api/applications 429 in 29ms (next.js: 1.9ms, application-code: 28ms)
+ POST /api/applications 429 in 30ms (next.js: 2.0ms, application-code: 28ms)
+ POST /api/applications 429 in 27ms (next.js: 1.9ms, application-code: 25ms)
+ GET /api/notifications 200 in 19ms (next.js: 3ms, application-code: 17ms)

@@ -1,0 +1,698 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   CSRP design tokens — black/charcoal base; crimson (Surya) and royal blue
+   (Chandra) as controlled highlights; silver and a whisper of solar orange.
+   ========================================================================== */
+@theme {
+  --font-display: var(--font-saira), "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-noto-deva), ui-sans-serif, system-ui, sans-serif;
+  --font-deva: var(--font-noto-deva), serif;
+
+  --color-void: #030304;
+  --color-ink: #060608;
+  --color-charcoal: #0b0c10;
+  --color-panel: #0f1015;
+  --color-panel-2: #14161c;
+
+  --color-crimson-700: #7c0b21;
+  --color-crimson-600: #a8102f;
+  --color-crimson-500: #d4163c;
+  --color-crimson-400: #f04664;
+
+  --color-royal-700: #15308f;
+  --color-royal-600: #1f44c9;
+  --color-royal-500: #2f5bff;
+  --color-royal-400: #5f86ff;
+  --color-moon-200: #c4d8ff;
+
+  --color-snow: #f4f5f7;
+  --color-silver-300: #b0b6c3;
+  --color-silver-400: #8c93a2;
+  --color-silver-500: #6c7382;
+
+  --color-solar: #ff7a3d;
+  --color-online: #2fd68a;
+  --color-warn: #f5b84a;
+
+  --ease-cine: cubic-bezier(0.22, 1, 0.36, 1);
+  --breakpoint-xs: 26rem;
+}
+
+:root {
+  color-scheme: dark;
+  --line: rgba(255, 255, 255, 0.07);
+  --line-strong: rgba(255, 255, 255, 0.13);
+}
+
+html {
+  background: var(--color-ink);
+  -webkit-text-size-adjust: 100%;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-snow);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(212, 22, 60, 0.5);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-royal-400);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+@utility container-x {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (min-width: 640px) {
+    padding-inline: 32px;
+  }
+}
+
+/* Editorial condensed display heading */
+@utility h-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.92;
+}
+
+/* Tiny bracketed technical label: [ LIVE CITY NETWORK ] */
+@utility tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-silver-400);
+}
+
+/* Dark charcoal card with thin technical border */
+@utility card {
+  background: linear-gradient(180deg, rgba(20, 22, 28, 0.9), rgba(11, 12, 16, 0.92));
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+/* Selective glass (nav, overlays) */
+@utility glass {
+  background: rgba(8, 9, 12, 0.62);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+/* ==========================================================================
+   Cursor-follow border glow. --mx/--my set by the pointer layer.
+   ========================================================================== */
+[data-glow] {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+}
+[data-glow]::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(280px circle at var(--mx) var(--my), rgba(95, 134, 255, 0.55), rgba(212, 22, 60, 0.28) 40%, transparent 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+[data-glow]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(420px circle at var(--mx) var(--my), rgba(255, 255, 255, 0.045), transparent 45%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+[data-glow]:hover::before,
+[data-glow]:hover::after,
+[data-glow]:focus-within::before {
+  opacity: 1;
+}
+
+/* Magnetic elements: --tx/--ty set by the pointer layer */
+[data-magnetic] {
+  --tx: 0px;
+  --ty: 0px;
+  translate: var(--tx) var(--ty);
+  transition: translate 0.35s var(--ease-cine);
+}
+
+/* ==========================================================================
+   Keyframes
+   ========================================================================== */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.intro-up {
+  animation: intro-up 0.85s var(--ease-cine) both;
+  animation-delay: var(--d, 0s);
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  80%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+.pulse-ring {
+  animation: pulse-ring 2.2s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+.twinkle {
+  animation: twinkle var(--t, 4s) ease-in-out infinite;
+  animation-delay: var(--td, 0s);
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(2.5%, -2%, 0);
+  }
+}
+.drift {
+  animation: drift var(--t, 28s) ease-in-out infinite;
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 64px 64px;
+  }
+}
+
+@keyframes rays-turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rays-turn {
+  animation: rays-turn 160s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+
+mark.hl {
+  background: rgba(212, 22, 60, 0.3);
+  color: #fff;
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pause loops when off-screen (set by IntersectionObserver) */
+.paused,
+.paused * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.1s !important;
+    scroll-behavior: auto !important;
+  }
+  [data-magnetic] {
+    translate: none !important;
+  }
+}
+
+/* ==========================================================================
+   Initial-load intro (once per session, ~1s). Pure CSS timing: it fades out
+   and stops intercepting clicks even if JavaScript never runs.
+   ========================================================================== */
+.csrp-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: #040507;
+  pointer-events: none;
+  animation: intro-out 0.3s ease 0.75s forwards;
+}
+html[data-intro='done'] .csrp-intro {
+  display: none;
+}
+.csrp-intro-moon,
+.csrp-intro-sun {
+  position: absolute;
+  width: 46vmin;
+  height: 46vmin;
+  border-radius: 9999px;
+  filter: blur(30px);
+}
+.csrp-intro-moon {
+  background: radial-gradient(closest-side, rgba(95, 134, 255, 0.45), transparent);
+  animation: intro-moon 0.7s var(--ease-cine) both;
+}
+.csrp-intro-sun {
+  background: radial-gradient(closest-side, rgba(212, 22, 60, 0.42), rgba(255, 122, 61, 0.12) 60%, transparent);
+  animation: intro-sun 0.7s var(--ease-cine) 0.12s both;
+}
+.csrp-intro-crest {
+  animation: intro-crest 0.6s var(--ease-cine) 0.15s both;
+}
+@keyframes intro-moon {
+  from { opacity: 0; transform: translateX(-28vmin); }
+  to { opacity: 1; transform: translateX(-7vmin); }
+}
+@keyframes intro-sun {
+  from { opacity: 0; transform: translateX(28vmin); }
+  to { opacity: 1; transform: translateX(7vmin); }
+}
+@keyframes intro-crest {
+  from { opacity: 0; transform: scale(0.86); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes intro-out {
+  to { opacity: 0; visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .csrp-intro { animation: intro-out 0.2s linear 0.2s forwards !important; }
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Procedural showcase scenes */
+@keyframes scene-road {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+@keyframes scene-trail {
+  to {
+    stroke-dashoffset: -160;
+  }
+}
+@keyframes scene-strobe {
+  0%,
+  45% {
+    opacity: 0.55;
+  }
+  50%,
+  100% {
+    opacity: 0.05;
+  }
+}
+.scene-road {
+  animation: scene-road 0.9s linear infinite;
+}
+.scene-trail {
+  animation: scene-trail 2.6s linear infinite;
+}
+.scene-trail-r {
+  animation-direction: reverse;
+  animation-duration: 3.4s;
+}
+.scene-strobe-a {
+  filter: blur(18px);
+  animation: scene-strobe 0.9s steps(1) infinite;
+}
+.scene-strobe-b {
+  filter: blur(18px);
+  animation: scene-strobe 0.9s steps(1) 0.45s infinite;
+}
+
+/* Final CTA: moon glow breathes, sun glow shifts, fog drifts */
+@keyframes cta-breathe {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@keyframes cta-shift {
+  0%, 100% { opacity: 0.85; transform: translate(0, 0); }
+  50% { opacity: 1; transform: translate(-3%, -2%); }
+}
+@keyframes cta-fog {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4%); }
+}
+.cta-moon-glow { animation: cta-breathe 10s ease-in-out infinite; }
+.cta-sun-glow { animation: cta-shift 12s ease-in-out infinite; }
+.cta-fog { animation: cta-fog 24s ease-in-out infinite; }
+
+/* ==========================================================================
+   Safe reveal system (see components/ui/Reveal.tsx). Content is visible by
+   default; it is only pre-hidden once the inline script confirms it can
+   reveal it again.
+   ========================================================================== */
+.reveal {
+  transition:
+    opacity 0.7s var(--ease-cine),
+    transform 0.7s var(--ease-cine);
+  transition-delay: var(--rd, 0s);
+}
+html.js-reveal .reveal:not([data-in]) {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+}
+.stagger > .reveal:nth-child(2) { --rd: 0.06s; }
+.stagger > .reveal:nth-child(3) { --rd: 0.12s; }
+.stagger > .reveal:nth-child(4) { --rd: 0.18s; }
+.stagger > .reveal:nth-child(5) { --rd: 0.24s; }
+.stagger > .reveal:nth-child(6) { --rd: 0.3s; }
+.stagger > .reveal:nth-child(7) { --rd: 0.36s; }
+.stagger > .reveal:nth-child(n + 8) { --rd: 0.42s; }
+
+@keyframes page-in {
+  from {
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+/* transform only — never animates opacity, so a page can't get stuck hidden */
+.page-in {
+  animation: page-in 0.45s var(--ease-cine) both;
+}
+
+@keyframes divider-spark {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(600%); }
+}
+.divider-spark {
+  animation: divider-spark 3.6s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   Hero refinements: sun bloom/haze, moon breathing, crest float, dust, scroll
+   ========================================================================== */
+.sun-rays {
+  /* few, soft, blurred rays — atmosphere rather than geometry */
+  background: repeating-conic-gradient(from 8deg, rgba(255, 140, 90, 0.09) 0deg 1.2deg, transparent 1.2deg 26deg);
+  filter: blur(3px);
+  animation: rays-turn 200s linear infinite;
+}
+@keyframes sun-haze {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.06); opacity: 1; }
+}
+.sun-haze {
+  animation: sun-haze 9s ease-in-out infinite;
+}
+@keyframes sun-flare {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  40% { opacity: 0.9; transform: scale(1); }
+}
+.sun-flare {
+  filter: blur(1px);
+  box-shadow: 0 0 10px 3px rgba(255, 140, 90, 0.5);
+  animation: sun-flare 5.5s ease-in-out infinite;
+}
+@keyframes moon-breathe {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+.moon-breathe {
+  animation: moon-breathe 8s ease-in-out infinite;
+}
+@keyframes crest-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.crest-float {
+  animation: crest-float 7s ease-in-out infinite;
+}
+@keyframes hero-dust {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 -600px, 0 -400px; }
+}
+.hero-dust {
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(223, 232, 255, 0.35), transparent),
+    radial-gradient(1px 1px at 70% 80%, rgba(255, 190, 160, 0.3), transparent);
+  background-size: 260px 300px, 340px 200px;
+  opacity: 0.6;
+  animation: hero-dust 60s linear infinite;
+}
+@keyframes scroll-line {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(300%); }
+}
+.scroll-line {
+  animation: scroll-line 1.8s ease-in-out infinite;
+}
+
+/* Developer empty slots: dark card with a slow border sweep */
+.dev-empty {
+  background: linear-gradient(180deg, rgba(18, 20, 27, 0.92), rgba(10, 11, 15, 0.95));
+  border: 1px solid var(--line);
+  isolation: isolate;
+}
+.dev-empty::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--sweep, 0deg), transparent 0deg, rgba(169, 189, 216, 0.55) 40deg, transparent 90deg, transparent 180deg, rgba(220, 20, 60, 0.5) 220deg, transparent 270deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.55;
+  animation: sweep 9s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+@property --sweep {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes sweep {
+  to { --sweep: 360deg; }
+}
+
+/* Nav links: subtle letter-spacing + red glow on hover */
+.nav-link {
+  transition:
+    color 0.25s ease,
+    letter-spacing 0.35s var(--ease-cine),
+    text-shadow 0.35s ease,
+    translate 0.35s var(--ease-cine);
+}
+.nav-link:hover {
+  letter-spacing: 0.17em;
+  text-shadow: 0 0 14px rgba(220, 20, 60, 0.45);
+}
+.toast-glow {
+  box-shadow: 0 0 0 1px rgba(220, 20, 60, 0.12), 0 0 28px -6px rgba(220, 20, 60, 0.35), 0 20px 50px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* ==========================================================================
+   Motion system (all safe: nothing is hidden unless html.js-reveal is set by
+   the inline reveal script, which also reveals it again)
+   ========================================================================== */
+/* Line-mask headings */
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.line-inner {
+  display: block;
+  transition: transform 0.95s var(--ease-cine);
+  transition-delay: calc(var(--li, 0) * 90ms + var(--rd, 0s));
+}
+html.js-reveal .reveal.reveal-lines:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+html.js-reveal .reveal-lines:not([data-in]) .line-inner {
+  transform: translate3d(0, 108%, 0);
+}
+/* Bracket labels slide in from the left */
+html.js-reveal .reveal.reveal-label:not([data-in]) {
+  transform: translate3d(-18px, 0, 0);
+}
+/* Media: scale 0.96 → 1 */
+html.js-reveal .reveal.reveal-media:not([data-in]) {
+  transform: translate3d(0, 18px, 0) scale(0.96);
+}
+/* Section hairline draws from the centre */
+.reveal-line > span:first-child {
+  transition: transform 1.1s var(--ease-cine);
+}
+html.js-reveal .reveal.reveal-line:not([data-in]) {
+  opacity: 1;
+  transform: none;
+}
+html.js-reveal .reveal-line:not([data-in]) > span:first-child {
+  transform: scaleX(0);
+}
+
+/* Hero title: line-mask load animation (pure CSS, no JS needed) */
+@keyframes hero-line {
+  from { transform: translate3d(0, 108%, 0); }
+  to { transform: none; }
+}
+.hero-line {
+  display: block;
+  animation: hero-line 1s var(--ease-cine) both;
+  animation-delay: calc(0.12s + var(--li, 0) * 0.11s);
+}
+
+/* Active-section tone: background glows cross-fade */
+.tone-moon,
+.tone-sun {
+  transition: opacity 1.4s ease;
+}
+html[data-tone="moon"] .tone-sun { opacity: 0.4; }
+html[data-tone="sun"] .tone-moon { opacity: 0.4; }
+html[data-tone="neutral"] .tone-moon,
+html[data-tone="neutral"] .tone-sun { opacity: 0.7; }
+
+/* Custom cursor: hide the native arrow only where our cursor is drawn */
+html.has-cursor,
+html.has-cursor * {
+  cursor: none !important;
+}
+html.has-cursor input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),
+html.has-cursor textarea,
+html.has-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+
+/* Hero: slow moon drift + orbit particles */
+@keyframes moon-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.5deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(1.5deg); }
+}
+.moon-drift {
+  animation: moon-drift 14s ease-in-out infinite;
+}
+@keyframes sun-spin {
+  to { transform: rotate(360deg); }
+}
+.sun-spin {
+  animation: sun-spin 420s linear infinite;
+}
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
+.orbit-slow { animation: orbit 90s linear infinite; }
+.orbit-slower { animation: orbit 150s linear infinite reverse; }
+
+@media (prefers-reduced-motion: reduce) {
+  .line-inner,
+  .hero-line { transform: none !important; animation: none !important; }
+}
+
+/* Film grain: a stepped, compositor-only jitter (transform only — no repaints). */
+@keyframes grain-drift {
+  0% { transform: translate3d(0, 0, 0); }
+  17% { transform: translate3d(-18px, 12px, 0); }
+  33% { transform: translate3d(14px, -22px, 0); }
+  50% { transform: translate3d(-26px, -8px, 0); }
+  67% { transform: translate3d(22px, 18px, 0); }
+  83% { transform: translate3d(-8px, 26px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.grain-drift {
+  animation: grain-drift 1.4s steps(6) infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grain-drift { animation: none; }
+}

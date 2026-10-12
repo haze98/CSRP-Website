@@ -1,0 +1,344 @@
+// CSRP database schema (PostgreSQL).
+//   npm run db:push      — sync schema to the database
+//   npm run db:migrate   — create a migration (production workflow)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/* ------------------------------------------------------------------ enums */
+
+enum ApplicationType {
+  WHITELIST
+  LSPD
+  EMS
+  STAFF
+  CREATOR
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  UNDER_REVIEW
+  INFO_REQUESTED
+  INTERVIEW
+  ACCEPTED
+  REJECTED
+  CLOSED
+}
+
+enum TicketType {
+  SUPPORT
+  PLAYER_REPORT
+  BAN_APPEAL
+  BUG_REPORT
+  CONTACT
+}
+
+enum TicketStatus {
+  OPEN
+  ASSIGNED
+  WAITING_FOR_PLAYER
+  RESOLVED
+  CLOSED
+}
+
+enum LogCategory {
+  AUTH
+  APPLICATION
+  SUPPORT
+  REPORT
+  STAFF
+  WHITELIST
+  STORE
+  SECURITY
+}
+
+/* ------------------------------------------------------------------ users */
+
+model User {
+  id          String    @id @default(cuid())
+  discordId   String    @unique
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  lastLoginAt DateTime?
+  isBanned    Boolean   @default(false)
+
+  profile          DiscordProfile?
+  applications     Application[]       @relation("Applicant")
+  reviewsWritten   ApplicationReview[] @relation("Reviewer")
+  assignedApps     Application[]       @relation("AssignedReviewer")
+  tickets          SupportTicket[]     @relation("TicketAuthor")
+  assignedTickets  SupportTicket[]     @relation("TicketAssignee")
+  ticketMessages   TicketMessage[]
+  auditLogs        AuditLog[]
+  quizAttempts     WhitelistQuizAttempt[]
+}
+
+/// Cached Discord identity + server-side verified guild data.
+model DiscordProfile {
+  id               String    @id @default(cuid())
+  userId           String    @unique
+  user             User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  username         String
+  displayName      String?
+  avatar           String?
+  accountCreatedAt DateTime?
+  inGuild          Boolean   @default(false)
+  /// Role IDs as returned by the Discord API (never from the client).
+  roleIds          String[]
+  rolesCheckedAt   DateTime?
+  updatedAt        DateTime  @updatedAt
+}
+
+/* ----------------------------------------------------------- applications */
+
+model Application {
+  id           String            @id @default(cuid())
+  /// Human-readable id, e.g. CSRP-LSPD-000127
+  publicId     String            @unique
+  type         ApplicationType
+  status       ApplicationStatus @default(SUBMITTED)
+  userId       String
+  user         User              @relation("Applicant", fields: [userId], references: [id], onDelete: Cascade)
+  characterName String?
+  assignedToId String?
+  assignedTo   User?             @relation("AssignedReviewer", fields: [assignedToId], references: [id])
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  decidedAt    DateTime?
+  /// Whitelist only: the passed quiz attempt this application was built on.
+  quizAttemptId String?   @unique
+  quizScore     Int?
+  quizTotal     Int?
+  /// Set when granting the Discord role failed after approval.
+  roleSyncError String?
+
+  answers ApplicationAnswer[]
+  reviews ApplicationReview[]
+
+  @@index([userId, type, status])
+  @@index([status, createdAt])
+}
+
+model ApplicationAnswer {
+  id            String      @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  questionKey   String
+  question      String
+  answer        String
+
+  @@index([applicationId])
+}
+
+/// Status changes, internal notes and assignments by staff.
+model ApplicationReview {
+  id            String             @id @default(cuid())
+  applicationId String
+  application   Application        @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  reviewerId    String
+  reviewer      User               @relation("Reviewer", fields: [reviewerId], references: [id])
+  fromStatus    ApplicationStatus?
+  toStatus      ApplicationStatus?
+  note          String?
+  internal      Boolean            @default(true)
+  createdAt     DateTime           @default(now())
+
+  @@index([applicationId])
+}
+
+/* ---------------------------------------------------------------- support */
+
+model SupportTicket {
+  id           String       @id @default(cuid())
+  /// Human-readable id, e.g. CSRP-TICKET-0418
+  publicId     String       @unique
+  type         TicketType
+  status       TicketStatus @default(OPEN)
+  subject      String
+  body         String
+  userId       String
+  user         User         @relation("TicketAuthor", fields: [userId], references: [id], onDelete: Cascade)
+  assignedToId String?
+  assignedTo   User?        @relation("TicketAssignee", fields: [assignedToId], references: [id])
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  messages     TicketMessage[]
+  playerReport PlayerReport?
+  banAppeal    BanAppeal?
+  bugReport    BugReport?
+
+  @@index([userId, status])
+  @@index([type, status])
+}
+
+model TicketMessage {
+  id        String        @id @default(cuid())
+  ticketId  String
+  ticket    SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User          @relation(fields: [authorId], references: [id])
+  body      String
+  internal  Boolean       @default(false)
+  createdAt DateTime      @default(now())
+
+  @@index([ticketId])
+}
+
+model PlayerReport {
+  id             String        @id @default(cuid())
+  ticketId       String        @unique
+  ticket         SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  reportedPlayer String
+  incidentAt     String?
+  evidenceUrl    String?
+}
+
+model BanAppeal {
+  id          String        @id @default(cuid())
+  ticketId    String        @unique
+  ticket      SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  banReason   String?
+  bannedBy    String?
+  bannedAt    String?
+}
+
+model BugReport {
+  id         String        @id @default(cuid())
+  ticketId   String        @unique
+  ticket     SupportTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  steps      String?
+  severity   String?
+  evidenceUrl String?
+}
+
+/* ------------------------------------------------------------- audit logs */
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  category   LogCategory
+  action     String
+  actorId    String?
+  actor      User?       @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  targetId   String?
+  /// Only stored when legally appropriate (security events); hashed elsewhere.
+  ip         String?
+  metadata   Json?
+  createdAt  DateTime    @default(now())
+
+  @@index([category, createdAt])
+}
+
+/* ----------------------------------------------------------- statistics */
+
+/// Periodic snapshots for status-page graphs (written by a cron/job).
+model ServerStatistic {
+  id             String   @id @default(cuid())
+  recordedAt     DateTime @default(now())
+  online         Boolean
+  players        Int
+  maxPlayers     Int
+  discordMembers Int?
+  discordOnline  Int?
+
+  @@index([recordedAt])
+}
+
+/* --------------------------------------------------------------- settings */
+
+model SiteSetting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
+
+/// Manually curated developer list (IDs are the source of truth, not roles).
+model Developer {
+  id        String   @id @default(cuid())
+  discordId String   @unique
+  title     String
+  role      String
+  skills    String[]
+  sortOrder Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+/// Website notifications, keyed by Discord ID so admins configured by ID
+/// receive them even before their first login.
+model Notification {
+  id          String    @id @default(cuid())
+  discordId   String
+  kind        String    @default("info")
+  title       String
+  body        String
+  href        String?
+  readAt      DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([discordId, readAt])
+}
+
+/// Browser push subscriptions (Web Push / VAPID).
+model PushSubscription {
+  id        String   @id @default(cuid())
+  discordId String
+  endpoint  String   @unique
+  p256dh    String
+  auth      String
+  createdAt DateTime @default(now())
+
+  @@index([discordId])
+}
+
+/// Website admin allowlist — assigned manually by the web developer / OWNER.
+/// Discord roles NEVER grant website admin access.
+model AdminAccess {
+  id          String   @id @default(cuid())
+  discordId   String   @unique
+  /// OWNER | HEAD_ADMIN | ADMIN | MODERATOR | APPLICATION_REVIEWER
+  accessLevel String
+  /// Optional explicit permission list; empty = defaults for the level.
+  permissions String[]
+  addedBy     String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+/// One whitelist quiz attempt. Correct answers never leave the server; the
+/// option tokens shown to the browser are random per attempt.
+model WhitelistQuizAttempt {
+  id          String    @id @default(cuid())
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questionIds String[]
+  /// { [questionId]: { [token]: optionIndex } }
+  optionMap   Json
+  score       Int?
+  passed      Boolean?
+  startedAt   DateTime  @default(now())
+  completedAt DateTime?
+  /// Set when the attempt is graded below the pass mark.
+  failedAt    DateTime?
+  /// failedAt + WHITELIST_RETRY_COOLDOWN_MINUTES, fixed at grading time (server clock).
+  /// No new quiz is generated for this user before this instant.
+  nextEligibleAttemptAt DateTime?
+  /// Set when a passed attempt is used for an application (single use).
+  usedAt      DateTime?
+
+  @@index([userId, startedAt])
+  @@index([userId, nextEligibleAttemptAt])
+}
+
+/// Monotonic counters for human-readable ids (CSRP-LSPD-000127).
+model Counter {
+  key   String @id
+  value Int    @default(0)
+}
