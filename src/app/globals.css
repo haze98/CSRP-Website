@@ -276,7 +276,6 @@ body {
   animation: shimmer 1.4s ease-in-out infinite;
 }
 
-
 mark.hl {
   background: rgba(212, 22, 60, 0.3);
   color: #fff;
@@ -372,61 +371,11 @@ html[data-intro='done'] .csrp-intro {
   }
 }
 
-/* Procedural showcase scenes */
-@keyframes scene-road {
-  to {
-    stroke-dashoffset: -22;
-  }
-}
-@keyframes scene-trail {
-  to {
-    stroke-dashoffset: -160;
-  }
-}
-@keyframes scene-strobe {
-  0%,
-  45% {
-    opacity: 0.55;
-  }
-  50%,
-  100% {
-    opacity: 0.05;
-  }
-}
-.scene-road {
-  animation: scene-road 0.9s linear infinite;
-}
-.scene-trail {
-  animation: scene-trail 2.6s linear infinite;
-}
-.scene-trail-r {
-  animation-direction: reverse;
-  animation-duration: 3.4s;
-}
-.scene-strobe-a {
-  filter: blur(18px);
-  animation: scene-strobe 0.9s steps(1) infinite;
-}
-.scene-strobe-b {
-  filter: blur(18px);
-  animation: scene-strobe 0.9s steps(1) 0.45s infinite;
-}
-
-/* Final CTA: moon glow breathes, sun glow shifts, fog drifts */
-@keyframes cta-breathe {
-  0%, 100% { opacity: 0.75; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.06); }
-}
-@keyframes cta-shift {
-  0%, 100% { opacity: 0.85; transform: translate(0, 0); }
-  50% { opacity: 1; transform: translate(-3%, -2%); }
-}
 @keyframes cta-fog {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(4%); }
 }
-.cta-moon-glow { animation: cta-breathe 10s ease-in-out infinite; }
-.cta-sun-glow { animation: cta-shift 12s ease-in-out infinite; }
+
 .cta-fog { animation: cta-fog 24s ease-in-out infinite; }
 
 /* ==========================================================================
@@ -474,45 +423,6 @@ html.js-reveal .reveal:not([data-in]) {
   opacity: 0.6;
 }
 
-/* ==========================================================================
-   Hero refinements: sun bloom/haze, moon breathing, crest float, dust, scroll
-   ========================================================================== */
-.sun-rays {
-  /* few, soft, blurred rays — atmosphere rather than geometry */
-  background: repeating-conic-gradient(from 8deg, rgba(255, 140, 90, 0.09) 0deg 1.2deg, transparent 1.2deg 26deg);
-  filter: blur(3px);
-  animation: rays-turn 200s linear infinite;
-}
-@keyframes sun-haze {
-  0%, 100% { transform: scale(1); opacity: 0.85; }
-  50% { transform: scale(1.06); opacity: 1; }
-}
-.sun-haze {
-  animation: sun-haze 9s ease-in-out infinite;
-}
-@keyframes sun-flare {
-  0%, 100% { opacity: 0; transform: scale(0.6); }
-  40% { opacity: 0.9; transform: scale(1); }
-}
-.sun-flare {
-  filter: blur(1px);
-  box-shadow: 0 0 10px 3px rgba(255, 140, 90, 0.5);
-  animation: sun-flare 5.5s ease-in-out infinite;
-}
-@keyframes moon-breathe {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.04); }
-}
-.moon-breathe {
-  animation: moon-breathe 8s ease-in-out infinite;
-}
-@keyframes crest-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-.crest-float {
-  animation: crest-float 7s ease-in-out infinite;
-}
 @keyframes hero-dust {
   from { background-position: 0 0, 0 0; }
   to { background-position: 0 -600px, 0 -400px; }
@@ -654,26 +564,6 @@ html.has-cursor [contenteditable="true"] {
   cursor: text !important;
 }
 
-/* Hero: slow moon drift + orbit particles */
-@keyframes moon-drift {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.5deg); }
-  50% { transform: translate3d(0, -10px, 0) rotate(1.5deg); }
-}
-.moon-drift {
-  animation: moon-drift 14s ease-in-out infinite;
-}
-@keyframes sun-spin {
-  to { transform: rotate(360deg); }
-}
-.sun-spin {
-  animation: sun-spin 420s linear infinite;
-}
-@keyframes orbit {
-  to { transform: rotate(360deg); }
-}
-.orbit-slow { animation: orbit 90s linear infinite; }
-.orbit-slower { animation: orbit 150s linear infinite reverse; }
-
 @media (prefers-reduced-motion: reduce) {
   .line-inner,
   .hero-line { transform: none !important; animation: none !important; }
@@ -696,3 +586,48 @@ html.has-cursor [contenteditable="true"] {
 @media (prefers-reduced-motion: reduce) {
   .grain-drift { animation: none; }
 }
+
+/* ---------------------------------------------------------------------------
+   Homepage media glow + emergency-light animations.
+   Transform / opacity only.
+--------------------------------------------------------------------------- */
+@keyframes glow-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); opacity: 0.85; }
+  50% { transform: translate3d(3%, -2%, 0); opacity: 1; }
+}
+.glow-drift { animation: glow-drift 14s ease-in-out infinite; }
+
+/* emergency lights: red and blue alternate, never strobe-fast */
+@keyframes siren-a { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+@keyframes siren-b { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+.siren-red { animation: siren-a 2.4s ease-in-out infinite; }
+.siren-blue { animation: siren-b 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-drift, .siren-red, .siren-blue { animation: none; }
+}
+
+/* Footer credit: white → crimson, faint glow, underline reveal (subtle). */
+.credit-link {
+  position: relative;
+  color: var(--color-silver-300);
+  pointer-events: auto;
+  transition: color 0.3s var(--ease-cine), text-shadow 0.3s var(--ease-cine);
+}
+.credit-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--color-crimson-500);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-cine);
+}
+.credit-link:hover {
+  color: var(--color-crimson-400);
+  text-shadow: 0 0 10px rgba(220, 20, 60, 0.45);
+}
+.credit-link:hover::after { transform: scaleX(1); }

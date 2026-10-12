@@ -1,7 +1,6 @@
 "use client";
 import { Check, Copy, UserRound } from "lucide-react";
 import { useState } from "react";
-import { CsrpCrest } from "@/components/brand/CsrpLogo";
 import { Avatar } from "@/components/ui/Avatar";
 import { InfiniteCarousel } from "@/components/ui/InfiniteCarousel";
 import { Reveal, RevealItem, Stagger } from "@/components/ui/Reveal";
@@ -32,16 +31,33 @@ function DevCard({ dev }: { dev: DeveloperView }) {
       <div className="flex items-center gap-4">
         <div className="relative">
           <span aria-hidden="true" className="absolute inset-[-6px] rounded-2xl bg-[radial-gradient(closest-side,rgba(95,134,255,0.35),transparent)] opacity-0 transition-opacity group-hover:opacity-100" />
-          <Avatar name={dev.displayName} src={dev.avatarUrl} size={64} className="relative" />
-          {s && <span className={`absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full border-2 border-charcoal ${s.cls}`} title={s.label} />}
+          {dev.synced ? (
+            <Avatar name={dev.displayName ?? dev.title} src={dev.avatarUrl} size={64} className="relative" />
+          ) : (
+            <span className="relative grid h-16 w-16 place-items-center rounded-2xl border border-dashed border-white/15 bg-white/[0.02] text-silver-500">
+              <UserRound size={30} strokeWidth={1.4} aria-hidden="true" />
+            </span>
+          )}
+          {s && dev.synced && <span className={`absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full border-2 border-charcoal ${s.cls}`} title={s.label} />}
         </div>
         <div className="min-w-0">
-          <h3 className="truncate font-display text-2xl font-semibold uppercase tracking-wide text-snow">{dev.displayName}</h3>
-          <p className="truncate text-sm text-silver-500">@{dev.username}</p>
+          {dev.synced ? (
+            <>
+              <h3 className="truncate font-display text-2xl font-semibold uppercase tracking-wide text-snow">{dev.displayName}</h3>
+              <p className="truncate text-sm text-silver-500">@{dev.username}</p>
+            </>
+          ) : (
+            <>
+              <h3 className="font-display text-xl font-semibold uppercase leading-tight tracking-wide text-snow">{dev.title}</h3>
+              <p className="flex items-center gap-1.5 text-sm text-warn">
+                <span aria-hidden="true" className="h-1.5 w-1.5 animate-pulse rounded-full bg-warn" /> Awaiting Discord Sync
+              </p>
+            </>
+          )}
         </div>
       </div>
-      <p className="mt-6 font-display text-lg font-semibold uppercase tracking-wide text-crimson-400">{dev.title}</p>
-      <p className="text-sm text-silver-300">{dev.role}</p>
+      {dev.synced && <p className="mt-6 font-display text-lg font-semibold uppercase tracking-wide text-crimson-400">{dev.title}</p>}
+      {dev.role && <p className={`text-sm text-silver-300 ${dev.synced ? "" : "mt-6"}`}>{dev.role}</p>}
       {dev.skills.length > 0 && (
         <ul className="mt-4 flex flex-wrap gap-1.5">
           {dev.skills.map((sk) => (
@@ -56,7 +72,7 @@ function DevCard({ dev }: { dev: DeveloperView }) {
           <p className="tag !text-[0.6rem]">Discord ID</p>
           <p className="truncate font-mono text-xs tabular-nums text-silver-300">{dev.discordId}</p>
         </div>
-        <button type="button" onClick={copy} aria-label={`Copy Discord ID of ${dev.displayName}`} className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-white/10 text-silver-400 transition-colors hover:text-snow">
+        <button type="button" onClick={copy} aria-label={`Copy Discord ID of ${dev.displayName ?? dev.title}`} className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-white/10 text-silver-400 transition-colors hover:text-snow">
           {copied ? <Check size={14} className="text-online" /> : <Copy size={14} />}
         </button>
       </div>
@@ -74,9 +90,6 @@ function EmptySlot({ index }: { index: number }) {
       <div className="relative flex items-start justify-between">
         <span className="grid h-16 w-16 place-items-center rounded-2xl border border-dashed border-white/15 bg-white/[0.02] text-silver-500">
           <UserRound size={30} strokeWidth={1.4} aria-hidden="true" />
-        </span>
-        <span className="crest-float opacity-40 transition-opacity group-hover:opacity-70" aria-hidden="true">
-          <CsrpCrest size={36} className="h-9 w-9" />
         </span>
       </div>
       <p className="relative mt-6 font-display text-xl font-semibold uppercase tracking-wide text-snow">{slot ? "Developer profile" : "Developer slot"}</p>

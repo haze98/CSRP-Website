@@ -18,6 +18,8 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "192.168.*.*", "10.*.*.*", "172.*.*.*", ...(process.env.ALLOWED_DEV_ORIGINS ?? "").split(",").map((s) => s.trim()).filter(Boolean)],
   images: {
     formats: ["image/avif", "image/webp"],
+    // 82 = homepage cards, 95 = hero (src/components/media/CinematicMedia.tsx)
+    qualities: [75, 82, 95],
     // Discord avatars for logged-in users and developer cards.
     remotePatterns: [{ protocol: "https", hostname: "cdn.discordapp.com" }],
   },

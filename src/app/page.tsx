@@ -10,7 +10,8 @@ import { StatusPreview } from "@/components/home/StatusPreview";
 import { WhatIsCsrp } from "@/components/home/WhatIsCsrp";
 import { SectionTransition } from "@/components/motion/SectionTransition";
 import { within } from "@/lib/timeout";
-import { getDevelopers } from "@/services/developer.service";
+import { resolveMediaMany } from "@/server/media";
+import { configuredDevelopers, getDevelopers } from "@/services/developer.service";
 import { getStatusHistory, getStatusSummary } from "@/services/status.service";
 
 // Re-render at most every 30s; live values keep refreshing client-side.
@@ -21,8 +22,9 @@ export default async function Home() {
   const [status, history, devs] = await Promise.all([
     within(getStatusSummary(), 1200, null),
     within(getStatusHistory(), 1200, null),
-    within(getDevelopers(), 1500, { mode: "unavailable" as const, data: [] }),
+    within(getDevelopers(), 1500, { mode: "unavailable" as const, data: configuredDevelopers() }),
   ]);
+  const media = resolveMediaMany(["hero", "showcaseStory", "showcaseServe", "showcaseLegacy", "showcaseNight", "cta"]);
   const faqLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -30,9 +32,9 @@ export default async function Home() {
   };
   return (
     <>
-      <Hero initial={status} />
+      <Hero initial={status} media={media.hero} />
       <QuickBar initial={status} />
-      <CityShowcase />
+      <CityShowcase media={media} />
       <WhatIsCsrp />
       <StatusPreview initial={status} history={history?.data ?? null} />
       <SectionTransition />

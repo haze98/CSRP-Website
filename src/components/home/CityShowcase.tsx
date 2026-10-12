@@ -1,23 +1,22 @@
 "use client";
 import { m, useScroll, useTransform } from "motion/react";
-import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { CsrpCrest } from "@/components/brand/CsrpLogo";
+import { useRef } from "react";
+import { CinematicMedia } from "@/components/media/CinematicMedia";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import type { MediaSlotKey, ResolvedMedia } from "@/config/media";
 import { showcase, type ShowcaseItem } from "@/config/showcase";
-import { SceneArt } from "./SceneArt";
 
 /** Asymmetric editorial grid (lg): tall / short / tall / short checkerboard. */
 const LAYOUT = ["lg:col-span-7 lg:row-span-5", "lg:col-span-5 lg:row-span-3", "lg:col-span-5 lg:row-span-5", "lg:col-span-7 lg:row-span-3"];
 
-export function CityShowcase() {
+export function CityShowcase({ media }: { media: Record<MediaSlotKey, ResolvedMedia> }) {
   return (
     <section data-tone="moon" aria-labelledby="showcase-title" className="py-20 sm:py-28">
       <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8">
         <SectionHeader index="01" tag="Inside the city" id="showcase-title" title="One city." accent="Countless stories." lede="Every shift, deal and late-night drive is played by a real person. These are the lives waiting for you in Chandra Surya." />
         <div className="stagger mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:auto-rows-[92px] lg:grid-cols-12 lg:gap-5">
           {showcase.map((item, i) => (
-            <ShowcaseCard key={item.n} item={item} className={LAYOUT[i % LAYOUT.length]} />
+            <ShowcaseCard key={item.n} item={item} media={media[item.media]} className={LAYOUT[i % LAYOUT.length]} />
           ))}
         </div>
       </div>
@@ -25,7 +24,7 @@ export function CityShowcase() {
   );
 }
 
-function ShowcaseCard({ item, className }: { item: ShowcaseItem; className: string }) {
+function ShowcaseCard({ item, media, className }: { item: ShowcaseItem; media: ResolvedMedia; className: string }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-22, 22]);
@@ -57,17 +56,17 @@ function ShowcaseCard({ item, className }: { item: ShowcaseItem; className: stri
       {/* media layer: scroll parallax + pointer parallax + hover zoom */}
       <m.div style={{ y, scale }} className="absolute inset-[-30px]">
         <div className="h-full w-full scale-[1.04] transition-transform duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] [translate:calc(var(--px,0)*-10px)_calc(var(--py,0)*-8px)] group-hover:scale-[1.1]">
-          <ShowcaseMedia item={item} />
+          <CinematicMedia media={media} tint sizes="(min-width:1024px) 60vw, (min-width:640px) 50vw, 100vw" />
         </div>
       </m.div>
       {/* cinematic grade */}
       <m.div aria-hidden="true" style={{ opacity: shade }} className="absolute inset-0 bg-gradient-to-t from-[#050608] via-[#050608]/55 to-[#050608]/10" />
       <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,6,8,0.6),transparent_60%)]" />
+      {/* red / blue edge light on hover */}
+      <div aria-hidden="true" className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 ${item.accent === "red" ? "bg-[radial-gradient(70%_60%_at_0%_100%,rgba(220,20,60,0.28),transparent_70%)]" : "bg-[radial-gradient(70%_60%_at_100%_100%,rgba(47,91,255,0.30),transparent_70%)]"}`} />
+      <div aria-hidden="true" className={`pointer-events-none absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-x-100 ${item.accent === "red" ? "bg-gradient-to-r from-crimson-500 via-crimson-400/60 to-transparent" : "bg-gradient-to-r from-royal-400 via-royal-400/60 to-transparent"}`} />
       <m.div style={{ y: copyY }} className="relative flex h-full flex-col justify-between p-6 sm:p-8">
-        <div className="flex items-start justify-between gap-3">
-          <span className="font-display text-base font-semibold tracking-[0.22em] text-snow/85">{item.n}</span>
-          {!item.media && <CsrpCrest size={44} className="h-10 w-10 opacity-70 transition-opacity group-hover:opacity-100" />}
-        </div>
+        <span className="font-display text-base font-semibold tracking-[0.22em] text-snow/85">{item.n}</span>
         <div className="max-w-md">
           <h3 className="h-display text-3xl text-snow sm:text-[2.6rem]">{item.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-silver-300 sm:text-[0.95rem]">{item.line}</p>
@@ -76,21 +75,4 @@ function ShowcaseCard({ item, className }: { item: ShowcaseItem; className: stri
       </m.div>
     </article>
   );
-}
-
-/** Image / video if configured and loadable; otherwise the original procedural scene. */
-function ShowcaseMedia({ item }: { item: ShowcaseItem }) {
-  const video = useRef<HTMLVideoElement>(null);
-  const [failed, setFailed] = useState(false);
-  useEffect(() => {
-    const v = video.current;
-    if (!v || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()), { threshold: 0.25 });
-    io.observe(v);
-    return () => io.disconnect();
-  }, []);
-
-  if (!item.media || failed) return <SceneArt kind={item.scene} className="h-full w-full" />;
-  if (item.media.type === "image") return <Image src={item.media.src} alt="" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" onError={() => setFailed(true)} />;
-  return <video ref={video} className="h-full w-full object-cover" src={item.media.src} poster={item.media.poster} muted loop playsInline preload="metadata" aria-hidden="true" onError={() => setFailed(true)} />;
 }

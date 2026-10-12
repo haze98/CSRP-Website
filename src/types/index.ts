@@ -137,9 +137,12 @@ export interface UserView extends SessionUser {
 /* -------------------------------------------------------------- developers */
 export interface DeveloperView {
   discordId: string;
-  displayName: string;
-  username: string;
+  /** Real Discord profile — null until the bot has fetched it (never invented). */
+  displayName: string | null;
+  username: string | null;
   avatarUrl: string | null;
+  /** True once the Discord profile was fetched successfully. */
+  synced: boolean;
   title: string;
   role: string;
   skills: string[];

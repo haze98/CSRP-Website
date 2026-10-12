@@ -77,9 +77,15 @@ export const serverConfig = {
    * Titles and skills are maintained here.
    */
   developers: {
-    ids: list(env("DEVELOPER_DISCORD_IDS")),
-    profiles: {} as Record<string, { title: string; role: string; skills: string[] }>,
+    ids: [...new Set(["1195271781544640522", ...list(env("DEVELOPER_DISCORD_IDS"))])],
+    profiles: {
+      "1195271781544640522": { title: "Developer", role: "", skills: [] },
+    } as Record<string, { title: string; role: string; skills: string[] }>,
   },
+
+  /* ----------------------------------------------------- website credit */
+  /** Footer credit (only the name is a link). */
+  credit: { name: "Real Haze", url: "https://guns.lol/nothaze._" as string },
 
   /* ---------------------------------------------------- discord roles */
   discordRoles: {

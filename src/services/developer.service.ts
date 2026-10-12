@@ -7,34 +7,33 @@ import { DiscordService } from "./discord.service";
 
 /**
  * Developers are defined by MANUALLY configured Discord IDs
- * (DEVELOPER_DISCORD_IDS / server.config.ts) — never by a Discord role.
- * The bot fetches each ID's avatar, username and display name.
- * Title / role / skills come from serverConfig.developers.profiles.
+ * (serverConfig.developers.ids + DEVELOPER_DISCORD_IDS) — never by a role.
+ * The bot fetches each ID's real avatar, username and display name. Until
+ * that succeeds the card shows only the configured title + "Awaiting Discord
+ * Sync" — no name, avatar or status is ever invented.
  */
-export async function getDevelopers(): Promise<{ mode: DataMode; data: DeveloperView[] }> {
-  const ids = serverConfig.developers.ids;
-  const live = ids.length > 0 && integrations.discordBot;
-  // Never invented: no configured IDs (or no bot) → empty list, rendered as empty slots.
-  if (!live) return { mode: "unavailable", data: [] };
-  const mode: DataMode = "live";
+const profileOf = (id: string) => serverConfig.developers.profiles[id] ?? { title: "Developer", role: "Development", skills: [] };
 
-  const users = await Promise.all(ids.map((id) => DiscordService.getUser(id).catch(() => null)));
-  const data = ids
-    .map((id, i): DeveloperView | null => {
-      const u = users[i];
-      if (!u) return null;
-      const p = serverConfig.developers.profiles[id] ?? { title: "Developer", role: "Developer", skills: [] };
-      return {
-        discordId: id,
-        displayName: u.global_name ?? u.username,
-        username: u.username,
-        avatarUrl: avatarUrl(id, u.avatar, 256),
-        title: p.title,
-        role: p.role,
-        skills: p.skills,
-        status: "unknown", // presence requires a gateway connection; wire your bot here if needed
-      };
-    })
-    .filter((d): d is DeveloperView => d !== null);
-  return { mode, data };
+/** Configured developers without Discord data (also the page's timeout fallback). */
+export function configuredDevelopers(): DeveloperView[] {
+  return serverConfig.developers.ids.map((id) => ({ discordId: id, displayName: null, username: null, avatarUrl: null, synced: false, ...profileOf(id), status: "unknown" }));
+}
+
+export async function getDevelopers(): Promise<{ mode: DataMode; data: DeveloperView[] }> {
+  const base = configuredDevelopers();
+  if (!integrations.discordBot) return { mode: "unavailable", data: base };
+  const users = await Promise.all(base.map((d) => DiscordService.getUser(d.discordId).catch(() => null)));
+  const data = base.map((d, i): DeveloperView => {
+    const u = users[i];
+    if (!u) return d;
+    return {
+      ...d,
+      displayName: u.global_name ?? u.username,
+      username: u.username,
+      avatarUrl: avatarUrl(d.discordId, u.avatar, 256),
+      synced: true,
+      status: "unknown", // presence needs a gateway connection — never guessed
+    };
+  });
+  return { mode: "live", data };
 }

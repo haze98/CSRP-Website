@@ -34,9 +34,10 @@ const columns = [
 ];
 
 export function Footer() {
+  const credit = serverConfig.credit;
   const socials = (Object.entries(serverConfig.socials) as [Brand, string][]).filter(([, url]) => url);
   return (
-    <footer className="relative mt-12 border-t border-white/[0.06] bg-void/80">
+    <footer className="relative border-t border-white/[0.06] bg-void/80">
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-royal-500/0 via-royal-400/40 to-crimson-500/40" />
       <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.4fr_2fr]">
         <div className="max-w-sm">
@@ -48,6 +49,9 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-5 text-sm leading-relaxed text-silver-400">{serverConfig.description}</p>
+          <p className="mt-4 text-[0.7rem] leading-relaxed text-silver-500">
+            Chandra Surya Roleplay is an independent roleplay community and is not affiliated with, endorsed by, or sponsored by Rockstar Games, Take-Two Interactive, Cfx.re, or their affiliates.
+          </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <ButtonLink href={serverConfig.discordInvite} variant="crimson" size="sm">
               <BrandIcon name="discord" size={16} /> Join Discord
@@ -76,13 +80,22 @@ export function Footer() {
           ))}
         </div>
       </div>
+      {/* bottom bar: copyright + credit, centred */}
       <div className="border-t border-white/[0.05]">
-        <div className="container-x flex flex-col gap-3 py-6 text-xs text-silver-500 md:flex-row md:items-start md:justify-between">
-          <p className="shrink-0">© 2026 Chandra Surya Roleplay. All rights reserved.</p>
-          <p className="max-w-2xl leading-relaxed md:text-right">
-            Chandra Surya Roleplay is an independent roleplay community and is not affiliated with, endorsed by, or sponsored by Rockstar Games, Take-Two Interactive, Cfx.re, or their affiliates.
-          </p>
-        </div>
+        <p className="container-x flex flex-col items-center justify-center gap-1 py-5 text-center text-xs text-silver-500 sm:flex-row sm:gap-3">
+          <span>
+            © {new Date().getFullYear()} {serverConfig.name}.<span className="hidden sm:inline"> All rights reserved.</span>
+          </span>
+          <span aria-hidden="true" className="hidden text-silver-500/60 sm:inline">•</span>
+          <span>
+            By{" "}
+            {credit.url ? (
+              <a href={credit.url} target="_blank" rel="noopener noreferrer" className="credit-link relative z-10 cursor-pointer" data-cursor="link">{credit.name}</a>
+            ) : (
+              <span className="credit-link">{credit.name}</span>
+            )}
+          </span>
+        </p>
       </div>
     </footer>
   );
